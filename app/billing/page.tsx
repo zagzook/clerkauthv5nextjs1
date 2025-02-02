@@ -11,7 +11,7 @@ const ClientPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userData, setUserData] = useState<any>(null)
   const router = useRouter()
-  console.log('userData,router', userData, router)
+  console.log('userData,router4', userData, router)
 
   useEffect(() => {
     const getUserData = async () => {
