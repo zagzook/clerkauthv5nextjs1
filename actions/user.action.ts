@@ -13,3 +13,13 @@ export async function createUser(user: any) {
     console.log('error', error)
   }
 }
+
+export async function getUser(userId: string) {
+  try {
+    await connect()
+    const user = await User.findOne({ where: { clerkId: userId } })
+    return JSON.parse(JSON.stringify(user))
+  } catch (error) {
+    console.log('error', error)
+  }
+}
