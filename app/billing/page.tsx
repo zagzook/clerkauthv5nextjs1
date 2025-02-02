@@ -6,11 +6,12 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 const ClientPage = () => {
-  const { isSignedIn, user, isLoaded } = useUser()
+  const { isSignedIn, user } = useUser()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userData, setUserData] = useState<any>(null)
   const router = useRouter()
+  console.log('userData,router', userData, router)
 
   useEffect(() => {
     const getUserData = async () => {
