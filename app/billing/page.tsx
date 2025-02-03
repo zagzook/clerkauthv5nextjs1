@@ -1,5 +1,6 @@
 'use client'
 
+import { subscribe } from '@/actions/stripe.action'
 import { getUser } from '@/actions/user.action'
 import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
@@ -25,23 +26,23 @@ const ClientPage = () => {
     }
   }, [isSignedIn, user])
 
-  // const handleClickSubscribeButton = async () => {
-  //   if (!isSignedIn) {
-  //     throw new Error('User is not signed In')
-  //   }
+  const handleClickSubscribeButton = async () => {
+    if (!isSignedIn) {
+      throw new Error('User is not signed In')
+    }
 
-  //   const url = await subscribe({
-  //     userId: user?.id || '',
-  //     email: user?.emailAddresses[0]?.emailAddress || '',
-  //     priceId: process.env.NEXT_PUBLIC_STRIPE_MOHTHLY_PRICE_ID!,
-  //   })
+    const url = await subscribe({
+      userId: user?.id || '',
+      email: user?.emailAddresses[0]?.emailAddress || '',
+      priceId: process.env.NEXT_PUBLIC_STRIPE_MOHTHLY_PRICE_ID!,
+    })
 
-  //   if (url) {
-  //     router.push(url)
-  //   } else {
-  //     throw new Error('Failed to subscribe')
-  //   }
-  // }
+    if (url) {
+      router.push(url)
+    } else {
+      throw new Error('Failed to subscribe')
+    }
+  }
 
   return (
     <div className="h-full flex flex-col items-center justify-center text-2xl">
@@ -68,7 +69,7 @@ const ClientPage = () => {
             You are not subscribed to the plan
           </div>
           <button
-            // onClick={handleClickSubscribeButton}
+            onClick={handleClickSubscribeButton}
             className="inline-block w-36 rounded-lg bg-blue-600 p-2 mt-4 text-center text-white">
             Subscribe
           </button>
